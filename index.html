@@ -51,7 +51,7 @@
 
         /* --- ชื่อบนพลุ --- */
         #name-container {
-            position: absolute; top: 12%; left: 50%;
+            position: absolute; top: 20%; left: 50%; /* ปรับตำแหน่งลงมาหน่อยเพราะไม่มีตัวนับเวลาแล้ว */
             transform: translate(-50%, -50%) scale(0.9);
             z-index: 10; opacity: 0; pointer-events: none;
             transition: all 1.2s ease-out; width: 100%; text-align: center;
@@ -64,18 +64,6 @@
             text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
             white-space: nowrap; margin: 0; letter-spacing: 1px;
         }
-
-        /* --- ตัวนับเวลา --- */
-        #love-timer-container {
-            margin-top: 15px; display: inline-block;
-            background: rgba(255, 255, 255, 0.15); padding: 8px 20px;
-            border-radius: 20px; backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.2);
-            text-align: center;
-        }
-        .timer-label { font-size: 0.9rem; opacity: 0.9; display: block; margin-bottom: 5px; }
-        #love-timer { font-size: 1rem; color: #fff; font-weight: 500; letter-spacing: 0.5px; }
-        .timer-highlight { font-weight: 700; color: #ff9ecd; font-variant-numeric: tabular-nums; }
 
         /* --- Puzzle --- */
         #puzzle-wrapper {
@@ -199,11 +187,7 @@
     
     <div id="name-container">
         <h1 class="glowing-text">นน 💗 มม</h1>
-        <div id="love-timer-container">
-            <span class="timer-label">เรียนจบมา</span>
-            <div id="love-timer">กำลังคำนวณ...</div>
         </div>
-    </div>
 
     <div id="puzzle-wrapper">
         <div class="puzzle-title">ช่วยต่อจิ๊กซอว์รูปเราให้ครบหน่อยนะ... 🧩</div>
@@ -235,33 +219,6 @@
     </div>
 
     <script>
-        // --- 1. วันที่เริ่ม (1 กันยายน 2567 = ค.ศ. 2024) ---
-        // ตั้งเป็นวันที่ 1 กันยายน เพราะไม่ได้ระบุวัน
-        const startDate = new Date("2024-09-01T00:00:00"); 
-
-        function updateTimer() {
-            const now = new Date();
-            const diff = now - startDate;
-            
-            if (diff < 0) {
-                 document.getElementById('love-timer').innerHTML = "รอวันแสดงความยินดี...";
-                 return;
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-
-            document.getElementById('love-timer').innerHTML = 
-                `<span class="timer-highlight">${days}</span> วัน 
-                 <span class="timer-highlight">${hours}</span> ชม. 
-                 <span class="timer-highlight">${minutes}</span> นาที
-                 <span class="timer-highlight">${seconds}</span> วินาที`;
-        }
-        setInterval(updateTimer, 1000); 
-        updateTimer();
-
         // --- ระบบข้อความ (เรียงลำดับ ไม่สุ่ม) ---
         const loveNotes = [
             "เก่งมากๆเลยนะเด็กบ้า🫳🏻🐶",
@@ -293,7 +250,7 @@
 
         // --- Decor (Hearts) ---
         const decoLayer = document.getElementById('deco-layer');
-        const hearts = ['💖', '💕', '✨', '💗', '🥰', '🎓', '💐']; // เพิ่มหมวกปริญญาและดอกไม้
+        const hearts = ['💖', '💕', '✨', '💗', '🥰', '🎓', '💐']; 
         setInterval(() => {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
